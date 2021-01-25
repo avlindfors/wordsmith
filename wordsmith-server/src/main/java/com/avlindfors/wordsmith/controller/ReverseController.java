@@ -47,8 +47,7 @@ public class ReverseController {
   /**
    * Gets the most recently reversed texts, ordered by creation.
    */
-  @GetMapping(value = "/reversals", produces = APPLICATION_JSON_VALUE,
-      consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/reversals", produces = APPLICATION_JSON_VALUE)
   public GetRecentReversalsResponse getRecentReversals() {
     List<ReversedText> recentReversals = reverseService.getRecentReversals();
     return GetRecentReversalsResponse.newBuilder()

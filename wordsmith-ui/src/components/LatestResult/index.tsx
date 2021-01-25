@@ -3,61 +3,84 @@ import React from "react";
 
 import { useApi } from "../../providers/ApiProvider";
 import { ReactComponent as LockIcon } from "../../icons/lock.svg";
-
-export interface LatestResultProps {
-  result?: string;
-}
+import { breakpoints } from "../../styles/breakpoints";
 
 const DEFAULT_RESULT_MESSAGE = "Use the form above to reverse some text";
 
-const LatestResult = ({ result }: LatestResultProps) => {
+const LatestResult = () => {
   const { response } = useApi();
 
   return (
-    <StyledResultContainer>
-      <StyledIconContainer>
-        <StyledLockIcon />
-      </StyledIconContainer>
-      <StyledResultBox>
-        <p>
-          {response !== undefined
-            ? response.reversedText
-            : DEFAULT_RESULT_MESSAGE}
-        </p>
-      </StyledResultBox>
-    </StyledResultContainer>
+    <section>
+      <StyledResultHeader>Result</StyledResultHeader>
+      <StyledResultContainer>
+        <StyledIconContainer>
+          <StyledLockIcon />
+        </StyledIconContainer>
+        <StyledResultBox>
+          <p>
+            {response !== undefined
+              ? response.reversedText
+              : DEFAULT_RESULT_MESSAGE}
+          </p>
+        </StyledResultBox>
+      </StyledResultContainer>
+    </section>
   );
 };
 
+const StyledResultHeader = styled.h3`
+  color: ${({ theme }) => theme.color.primary};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  font-size: ${({ theme }) => theme.fontSize[4]};
+
+  @media screen and (min-width: ${breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSize[5]};
+    margin-bottom: ${({ theme }) => theme.spacing[6]};
+  }
+`;
+
 const StyledLockIcon = styled(LockIcon)`
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   path {
     fill: ${({ theme }) => theme.color.disabled};
+  }
+
+  @media screen and (min-width: ${breakpoints.md}) {
+    width: 36px;
+    height: 36px;
   }
 `;
 
 const StyledIconContainer = styled.div`
-  padding: ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[2]};
   background: ${({ theme }) => theme.color.resultBoxBorder};
   height: inherit;
   width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (min-width: ${breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing[4]};
+  }
 `;
 
 const StyledResultBox = styled.div`
-  padding: ${({ theme }) => theme.spacing[5]};
+  padding: ${({ theme }) => theme.spacing[3]};
   color: ${({ theme }) => theme.color.text.dark};
   font-size: ${({ theme }) => theme.fontSize[3]};
   line-height: 1.5em;
   word-wrap: break-word;
   word-break: break-all;
+
+  @media screen and (min-width: ${breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing[5]};
+  }
 `;
 
 const StyledResultContainer = styled.div`
-  height: ${({ theme }) => theme.inputBoxHeight};
+  min-height: ${({ theme }) => theme.inputBoxHeight};
   background: ${({ theme }) => theme.color.resultBoxBackground};
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;

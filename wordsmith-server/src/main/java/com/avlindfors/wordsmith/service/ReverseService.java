@@ -71,6 +71,6 @@ public class ReverseService {
    * @return a list of {@link ReversedText} ordered by createdTs.
    */
   public List<ReversedText> getRecentReversals() {
-    return reversedTextRepository.findFirst5ByOrderByCreatedTsAsc();
+    return reversedTextRepository.findFirst5ByOrderByCreatedTsDesc();
   }
 }

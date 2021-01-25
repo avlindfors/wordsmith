@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Theme } from "@emotion/react";
+import { Theme, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { useApi } from "../../providers/ApiProvider";
 import resolveErrorMessage from "../../utils/resolveErrorMessage";
 import { ReactComponent as WarningIcon } from "../../icons/error.svg";
+import { breakpoints } from "../../styles/breakpoints";
 
 const DEFAULT_PLACEHOLDER = "Enter some text here that you want to reverse.";
 
@@ -20,6 +21,7 @@ function validateForm(inputText: string): boolean {
 const INPUT_MAX_LENGTH = 200;
 
 const ReverseForm = (props: ReverseFormProps) => {
+  const { color } = useTheme();
   const [inputText, setInputText] = useState<string>("");
   const { isLoading, error, reverseText } = useApi();
 
@@ -36,6 +38,7 @@ const ReverseForm = (props: ReverseFormProps) => {
   };
 
   const isValidForm = validateForm(inputText);
+  const isMaxLength = inputText.length === INPUT_MAX_LENGTH;
   return (
     <StyledForm onSubmit={performPost}>
       <label style={{ width: "100%" }}>
@@ -64,10 +67,12 @@ const ReverseForm = (props: ReverseFormProps) => {
               </StyledErrorMessage>
             </StyledErrorMessageContainer>
           )}
-          <StyledWordCounter>{`${inputText.length} / ${INPUT_MAX_LENGTH}`}</StyledWordCounter>
+          <StyledWordCounter
+            textColor={isMaxLength ? color.warning : color.text.light}
+          >{`${inputText.length} / ${INPUT_MAX_LENGTH}`}</StyledWordCounter>
         </StyledErrorMessageAndCounterContainer>
         <StyledSubmitButton type="submit" disabled={!isValidForm || isLoading}>
-          {!isLoading ? "Reverse!" : "Loading!"}
+          {!isLoading ? "Reverse!" : "Reversing!"}
         </StyledSubmitButton>
       </StyledButtonAndErrorMessageContainer>
     </StyledForm>
@@ -75,16 +80,24 @@ const ReverseForm = (props: ReverseFormProps) => {
 };
 
 const StyledErrorMessageAndCounterContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
   font-size: ${({ theme }) => theme.fontSize[3]};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media screen and (min-width: ${breakpoints.md}) {
+    margin-bottom: ${({ theme }) => theme.spacing[4]};
+    font-size: ${({ theme }) => theme.fontSize[3]};
+  }
 `;
 
-const StyledWordCounter = styled.p`
-  color: ${({ theme }) => theme.color.text.light};
+const StyledWordCounter = styled.p<any>`
+  color: ${({ textColor }) => textColor};
   margin-left: auto;
+  font-size: ${({ theme }) => theme.fontSize[2]};
+  @media screen and (min-width: ${breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSize[3]};
+  }
 `;
 
 const StyledIntroductionText = styled.p`
@@ -101,6 +114,10 @@ const StyledButtonAndErrorMessageContainer = styled.div`
 const StyledErrorMessage = styled.p`
   color: ${({ theme }) => theme.color.warning};
   margin-right: ${({ theme }) => theme.spacing[5]};
+  font-size: ${({ theme }) => theme.fontSize[2]};
+  @media screen and (min-width: ${breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSize[3]};
+  }
 `;
 
 const StyledErrorMessageContainer = styled.div`
@@ -113,15 +130,24 @@ const StyledWarningIcon = styled(WarningIcon)`
   path {
     fill: ${({ theme }) => theme.color.warning};
   }
+
+  display: none;
+  @media screen and (min-width: ${breakpoints.md}) {
+    display: inline;
+  }
 `;
 
 const StyledForm = styled.form`
-  background: ${({ theme }) => theme.color.lightCardBackground};
   border-radius: ${({ theme }) => theme.borderRadius};
-  margin-bottom: ${({ theme }) => theme.spacing[5]};
-  padding: ${({ theme }) => theme.spacing[5]};
+  margin-bottom: ${({ theme }) => theme.spacing[7]};
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width: ${breakpoints.sm}) {
+    padding: ${({ theme }) => theme.spacing[4]};
+    background: ${({ theme }) => theme.color.lightCardBackground};
+    padding: ${({ theme }) => theme.spacing[5]};
+  }
 `;
 
 const StyledSubmitButton = styled.button`
@@ -138,7 +164,9 @@ const StyledSubmitButton = styled.button`
   cursor: pointer;
 
   transition: all 250ms ease;
-
+  &:not(:disabled):hover {
+    transform: translate3d(0, -2px, 0);
+  }
   &:disabled {
     opacity: 50%;
     cursor: not-allowed;
@@ -152,14 +180,18 @@ function createButtonPadding(theme: Theme): string {
 const StyledTextArea = styled.textarea`
   height: ${({ theme }) => theme.inputBoxHeight};
   border-radius: ${({ theme }) => theme.borderRadius};
-  padding: ${({ theme }) => theme.spacing[5]};
-  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[3]};
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
   font-size: ${({ theme }) => theme.fontSize[3]};
   color: ${({ theme }) => theme.color.text.dark};
   width: inherit;
   display: block;
   border: none;
   resize: none;
+  @media screen and (min-width: ${breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing[5]};
+    margin-bottom: ${({ theme }) => theme.spacing[4]};
+  }
 `;
 
 export default ReverseForm;

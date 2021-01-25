@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReversedTextRepository extends MongoRepository<ReversedText, String> {
 
-  List<ReversedText> findFirst5ByOrderByCreatedTsAsc();
+  List<ReversedText> findFirst5ByOrderByCreatedTsDesc();
 }

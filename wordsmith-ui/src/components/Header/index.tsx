@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import { breakpoints } from "../../styles/breakpoints";
 
 function Header() {
-  const theme = useTheme();
-
   return (
-    <header style={{ marginBottom: theme.spacing[8] }}>
+    <StyledHeader>
       <StyledLogo>Wordsmith Inc.</StyledLogo>
-    </header>
+    </StyledHeader>
   );
 }
+
+const StyledHeader = styled.header`
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  text-align: left;
+  @media screen and (min-width: ${breakpoints.md}) {
+    margin-bottom: ${({ theme }) => theme.spacing[8]};
+  }
+`;
 
 const StyledLogo = styled.h1`
   color: ${({ theme }) => theme.color.logoColor};

@@ -6,17 +6,17 @@ import resolveRelativeDate from "../../utils/resolveRelativeDate";
 import { ReactComponent as ClockIcon } from "../../icons/clock.svg";
 import { ReactComponent as ForwardIcon } from "../../icons/rotate_right.svg";
 import { ReactComponent as BackwardIcon } from "../../icons/rotate_left.svg";
-import { css, GlobalProps, Theme } from "@emotion/react";
-import { ThemeType } from "../../styles/theme";
+import { css, Theme } from "@emotion/react";
 
 export interface RecentlyReversedProps {}
 
 const RecentlyReversed = () => {
   const { recentlyReversedText } = useApi();
 
+  const filteredRecentlyReversed = [...recentlyReversedText].slice(0, 5);
   return (
     <StyledContainer>
-      {recentlyReversedText.map(
+      {filteredRecentlyReversed.map(
         ({ id, originalText, reversedText, createdTs }) => {
           return (
             <StyledRecentlyReversedTextContainer key={id}>
@@ -70,7 +70,7 @@ const StyledRecentlyReversedTextContainer = styled.div`
     bottom: 0;
     left: 0;
     width: 6px;
-    background: ${({ theme }) => theme.color.recentlyReversedHighlight};
+    background: ${({ theme }) => theme.color.secondary};
     border-radius: ${({ theme }) => theme.borderRadius};
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -104,12 +104,13 @@ interface SharedProps {
 
 const sharedIconStyles = ({ theme }: SharedProps) => css`
   margin-right: ${theme.spacing[4]};
+  align-self: flex-start;
   width: 24px;
   height: 24px;
   grid-column: 1;
   path {
+    fill: ${theme.color.secondary};
     fill-opacity: 1;
-    fill: ${theme.color.recentlyReversedIcon};
   }
 `;
 

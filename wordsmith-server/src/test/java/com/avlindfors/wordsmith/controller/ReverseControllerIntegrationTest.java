@@ -22,6 +22,7 @@ import com.avlindfors.wordsmith.repository.ReversedTextRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -84,8 +85,9 @@ public class ReverseControllerIntegrationTest {
     GetRecentReversalsResponse response = getRecentReversals();
     List<ReversedText> reversedTexts = response.getRecentReversals();
     assertThat(reversedTexts).hasSize(5);
+    // Reverse order to put newest entry first.
     List<ReversedText> reversedTextsInExpectedOrder = reversedTexts.stream()
-        .sorted(comparing(ReversedText::getCreatedTs))
+        .sorted(comparing(ReversedText::getCreatedTs).reversed())
         .collect(toList());
     assertThat(reversedTexts).usingRecursiveComparison().isEqualTo(reversedTextsInExpectedOrder);
   }

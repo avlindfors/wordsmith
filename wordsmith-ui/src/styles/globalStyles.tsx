@@ -1,6 +1,11 @@
 import { css } from "@emotion/react";
 
 export const globalStyles = css`
+  html,
+  body {
+    background: #273050;
+  }
+
   * {
     padding: 0;
     margin: 0;

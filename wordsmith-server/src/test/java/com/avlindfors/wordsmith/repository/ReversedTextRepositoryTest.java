@@ -72,10 +72,11 @@ public class ReversedTextRepositoryTest {
 
     assertThat(reversedTextRepository.findAll()).hasSize(numberOfEntriesToSave);
     List<ReversedText> mostRecentlyReversed = reversedTextRepository
-        .findFirst5ByOrderByCreatedTsAsc();
+        .findFirst5ByOrderByCreatedTsDesc();
     assertThat(mostRecentlyReversed).hasSize(5);
 
-    reversedTexts.sort(comparing(ReversedText::getCreatedTs));
+    // Reverse order to put newest entry first.
+    reversedTexts.sort(comparing(ReversedText::getCreatedTs).reversed());
     for (int i = 0; i < mostRecentlyReversed.size(); i++) {
       // createdTs precision changes after persistence. Ignoring for now.
       assertThat(mostRecentlyReversed.get(i)).usingRecursiveComparison()
