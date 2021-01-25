@@ -9,11 +9,12 @@ import static org.mockito.Mockito.mock;
 
 import com.avlindfors.wordsmith.domain.model.ReversedText;
 import com.avlindfors.wordsmith.repository.ReversedTextRepository;
+
+import java.time.Instant;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.time.Instant;
-import java.util.UUID;
 
 public class ReverseServiceUnitTest {
 
@@ -21,7 +22,7 @@ public class ReverseServiceUnitTest {
 
   private final ReversedTextRepository reversedTextRepositoryMock;
 
-  public ReverseServiceUnitTest() {
+  private ReverseServiceUnitTest() {
     reverseService = new ReverseService();
     reversedTextRepositoryMock = mock(ReversedTextRepository.class);
 

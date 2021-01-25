@@ -6,11 +6,13 @@ import static java.util.UUID.randomUUID;
 import com.avlindfors.wordsmith.domain.api.ReverseRequest;
 import com.avlindfors.wordsmith.domain.model.ReversedText;
 import com.avlindfors.wordsmith.repository.ReversedTextRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReverseService {
@@ -62,5 +64,13 @@ public class ReverseService {
     text.setOriginalText(originalText);
     text.setReversedText(reversedText);
     return text;
+  }
+
+  /**
+   * Gets the 5 most recent reversed texts.
+   * @return a list of {@link ReversedText} ordered by createdTs.
+   */
+  public List<ReversedText> getRecentReversals() {
+    return reversedTextRepository.findFirst5ByOrderByCreatedTsAsc();
   }
 }

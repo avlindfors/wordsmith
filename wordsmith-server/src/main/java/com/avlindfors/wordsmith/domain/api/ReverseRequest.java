@@ -2,9 +2,8 @@ package com.avlindfors.wordsmith.domain.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @JsonDeserialize(builder = ReverseRequest.Builder.class)
 public class ReverseRequest {

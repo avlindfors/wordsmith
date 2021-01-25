@@ -8,9 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication
 @EnableAutoConfiguration
 public class WordsmithApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(WordsmithApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(WordsmithApplication.class, args);
+  }
 }

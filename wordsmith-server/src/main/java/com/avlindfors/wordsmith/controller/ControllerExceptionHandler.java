@@ -3,6 +3,10 @@ package com.avlindfors.wordsmith.controller;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 import com.avlindfors.wordsmith.domain.api.ErrorData;
+
+import java.util.stream.Collectors;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.stream.Collectors;
-import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
@@ -37,7 +39,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
   private String createErrorObjectMessage(ObjectError objectError) {
     if (objectError instanceof FieldError) {
       FieldError fieldError = (FieldError) objectError;
-    return String.format("%s: %s", fieldError.getField(), objectError.getDefaultMessage());
+      return String.format("%s: %s", fieldError.getField(), objectError.getDefaultMessage());
     }
     return String.format("%s: %s", objectError.getObjectName(), objectError.getDefaultMessage());
   }

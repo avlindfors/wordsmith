@@ -14,12 +14,18 @@ public class ReverseUtil {
   public static final String REVERSED_TEXT = "esreveR em, esaelp. dnA em oot,"
       + " fi uoy t'nod dnim?";
 
+  /**
+   * Create a simple {@link ReverseRequest}.
+   */
   public static ReverseRequest createReverseRequest(String withText) {
     return ReverseRequest.newBuilder()
         .withTextToReverse(withText)
         .build();
   }
 
+  /**
+   * Create a simple {@link ReversedText}.
+   */
   public static ReversedText createReversedText(String original, String reversed) {
     ReversedText reversedText = new ReversedText();
     reversedText.setId(randomUUID().toString());

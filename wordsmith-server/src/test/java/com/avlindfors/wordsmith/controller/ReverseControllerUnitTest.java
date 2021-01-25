@@ -1,7 +1,7 @@
 package com.avlindfors.wordsmith.controller;
 
-import static com.avlindfors.wordsmith.util.ReverseUtil.REVERSED_TEXT;
 import static com.avlindfors.wordsmith.util.ReverseUtil.ORIGINAL_TEXT;
+import static com.avlindfors.wordsmith.util.ReverseUtil.REVERSED_TEXT;
 import static com.avlindfors.wordsmith.util.ReverseUtil.createReverseRequest;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +18,9 @@ import com.avlindfors.wordsmith.domain.api.ReverseResponse;
 import com.avlindfors.wordsmith.domain.model.ReversedText;
 import com.avlindfors.wordsmith.service.ReverseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.time.Instant;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.time.Instant;
 
 @WebMvcTest(ReverseController.class)
 public class ReverseControllerUnitTest {
