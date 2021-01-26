@@ -5,8 +5,8 @@ const RecentlyReversedSkeleton = () => {
   return (
     <StyledSkeletonContainer>
       <StyledHeader></StyledHeader>
-      <StyledContent></StyledContent>
-      <StyledContent></StyledContent>
+      <StyledSkeletonElement></StyledSkeletonElement>
+      <StyledSkeletonElement></StyledSkeletonElement>
     </StyledSkeletonContainer>
   );
 };
@@ -14,14 +14,15 @@ const RecentlyReversedSkeleton = () => {
 const StyledSkeletonContainer = styled.div`
   background: ${({ theme }) => theme.color.lightCardBackground};
   padding: ${({ theme }) => theme.spacing[5]};
-  margin-bottom: ${({ theme }) => theme.spacing[7]};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
   border-radius: ${({ theme }) => theme.borderRadius};
-  width: auto;
+  width: 100%;
   height: auto;
 `;
 
 const StyledSkeletonElement = styled.div`
   background: ${({ theme }) => theme.color.skeletonText};
+  width: 100%;
   height: 30px;
   border-radius: inherit;
   &:not(:last-of-type) {
@@ -30,11 +31,7 @@ const StyledSkeletonElement = styled.div`
 `;
 
 const StyledHeader = styled(StyledSkeletonElement)`
-  width: 200px;
-`;
-const StyledContent = styled(StyledSkeletonElement)`
-  width: 400px;
-  max-width: 100%;
+  max-width: 200px;
 `;
 
 export default RecentlyReversedSkeleton;

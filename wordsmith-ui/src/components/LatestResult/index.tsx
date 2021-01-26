@@ -54,13 +54,16 @@ const StyledLockIcon = styled(LockIcon)`
 `;
 
 const StyledIconContainer = styled.div`
+  display: none;
   padding: ${({ theme }) => theme.spacing[2]};
   background: ${({ theme }) => theme.color.resultBoxBorder};
   height: inherit;
   width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @media screen and (min-width: ${breakpoints.sm}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @media screen and (min-width: ${breakpoints.md}) {
     padding: ${({ theme }) => theme.spacing[4]};
   }

@@ -7,6 +7,7 @@ import { ReactComponent as ClockIcon } from "../../icons/clock.svg";
 import { ReactComponent as ForwardIcon } from "../../icons/rotate_right.svg";
 import { ReactComponent as BackwardIcon } from "../../icons/rotate_left.svg";
 import { css, Theme } from "@emotion/react";
+import { breakpoints } from "../../styles/breakpoints";
 
 export interface RecentlyReversedProps {}
 
@@ -54,10 +55,10 @@ const StyledContainer = styled.div`
 
 const StyledRecentlyReversedTextContainer = styled.div`
   background: ${({ theme }) => theme.color.lightCardBackground};
-  padding: ${({ theme }) => theme.spacing[5]};
-  padding-top: ${({ theme }) => theme.spacing[4]};
-  padding-bottom: ${({ theme }) => theme.spacing[4]};
-  margin-bottom: ${({ theme }) => theme.spacing[5]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  padding-top: ${({ theme }) => theme.spacing[3]};
+  padding-bottom: ${({ theme }) => theme.spacing[3]};
+  margin-bottom: ${({ theme }) => theme.spacing[3]};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: auto;
   height: auto;
@@ -74,6 +75,13 @@ const StyledRecentlyReversedTextContainer = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius};
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+  }
+
+  @media screen and (min-width: ${breakpoints.sm}) {
+    padding: ${({ theme }) => theme.spacing[5]};
+    padding-top: ${({ theme }) => theme.spacing[4]};
+    padding-bottom: ${({ theme }) => theme.spacing[4]};
+    margin-bottom: ${({ theme }) => theme.spacing[5]};
   }
 `;
 
@@ -103,7 +111,7 @@ interface SharedProps {
 }
 
 const sharedIconStyles = ({ theme }: SharedProps) => css`
-  margin-right: ${theme.spacing[4]};
+  margin-right: ${theme.spacing[2]};
   align-self: flex-start;
   width: 24px;
   height: 24px;
@@ -111,6 +119,10 @@ const sharedIconStyles = ({ theme }: SharedProps) => css`
   path {
     fill: ${theme.color.secondary};
     fill-opacity: 1;
+  }
+
+  @media screen and (min-width: ${breakpoints.sm}) {
+    margin-right: ${theme.spacing[4]};
   }
 `;
 

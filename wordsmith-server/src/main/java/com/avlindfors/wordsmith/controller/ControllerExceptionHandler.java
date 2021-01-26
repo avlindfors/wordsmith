@@ -42,8 +42,8 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> handleRuntimeException(RuntimeException e, HttpHeaders headers,
       HttpStatus status, WebRequest request) {
     ErrorData errorData = createErrorData(INTERNAL_SERVER_ERROR.name(), e.getMessage());
-    return handleExceptionInternal(e, errorData, headers, HttpStatus.INTERNAL_SERVER_ERROR,
-      request);
+    return handleExceptionInternal(e, errorData, new HttpHeaders(),
+        HttpStatus.INTERNAL_SERVER_ERROR, request);
   }
 
   /**

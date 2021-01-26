@@ -54,7 +54,7 @@ function ApiProvider({ children }: any) {
     setError(undefined);
 
     api
-      .post("/api/v1/reverse", {
+      .post("http://localhost:8080/api/v1/reverse", {
         textToReverse,
       })
       .then((data: AxiosResponse) => {
@@ -80,7 +80,7 @@ function ApiProvider({ children }: any) {
 
     setTimeout(() => {
       api
-        .get("/api/v1/reversals")
+        .get("http://localhost:8080/api/v1/reversals")
         .then((data: AxiosResponse) => {
           const responseData = data.data as GetRecentReversalsResponse;
           const recentReversals = responseData.recentReversals;

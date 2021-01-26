@@ -19,6 +19,7 @@ const StyledEmptyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: ${({theme}) => theme.spacing[7]};
 `;
 
 const StyledEmptyHeader = styled.h4`

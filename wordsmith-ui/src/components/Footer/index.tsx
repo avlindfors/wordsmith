@@ -11,7 +11,8 @@ const Footer = () => {
 };
 
 const StyledFooter = styled.div`
-  padding-top: ${({ theme }) => theme.spacing[4]};
+  background: ${({ theme }) => theme.color.background.light};
+  padding: ${({ theme }) => theme.spacing[4]};
   font-size: ${({ theme }) => theme.fontSize[2]};
   color: ${({ theme }) => theme.color.secondary};
   width: 100%;
@@ -20,6 +21,11 @@ const StyledFooter = styled.div`
   // Sprid över båda kolumnerna
   grid-column: 1 / 3;
   @media screen and (min-width: ${breakpoints.sm}) {
+    padding: 0;
+    background: transparent;
+  }
+
+  @media screen and (min-width: ${breakpoints.lg}) {
     padding-top: ${({ theme }) => theme.spacing[7]};
   }
 `;

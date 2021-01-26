@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: wordsmith
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports: 
+      - 8081:8081
+    environment: 
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: wordsmith
+
+  wordsmith-server:
+    image: avlindfors/wordsmith-server
+    container_name: wordsmith-server
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+
+  wordsmith-ui:
+    image: avlindfors/wordsmith-ui
+    container_name: wordsmith-ui
+    ports: 
+      - 8000:8000
+    depends_on: 
+      - wordsmith-server

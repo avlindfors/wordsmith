@@ -35,7 +35,7 @@ const Content = styled.div`
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 1.5fr 1fr;
-    grid-column-gap: ${({ theme }) => theme.spacing[7]};
+    grid-column-gap: ${({ theme }) => theme.spacing[8]};
   }
 `;
 
