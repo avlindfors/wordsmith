@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Theme, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { useApi } from "../../providers/ApiProvider";
+import { useData } from "../../providers/DataProvider";
 import resolveErrorMessage from "../../utils/resolveErrorMessage";
 import { ReactComponent as WarningIcon } from "../../icons/error.svg";
 import { breakpoints } from "../../styles/breakpoints";
+import useAxios from "../../hooks/useAxios";
 
 const DEFAULT_PLACEHOLDER = "Enter some text here that you want to reverse.";
-
-export interface ReverseFormProps {}
 
 function validateForm(inputText: string): boolean {
   return (
@@ -20,10 +19,15 @@ function validateForm(inputText: string): boolean {
 
 const INPUT_MAX_LENGTH = 200;
 
-const ReverseForm = (props: ReverseFormProps) => {
+const ReverseForm = () => {
   const { color } = useTheme();
   const [inputText, setInputText] = useState<string>("");
-  const { isLoading, error, reverseText } = useApi();
+  const { updateReverseResult } = useData();
+  const { isLoading, error, performCall } = useAxios({
+    url: "/api/v1/reverse",
+    method: "POST",
+    onResponse: updateReverseResult,
+  });
 
   const updateText = (event: React.SyntheticEvent) => {
     const target = event.target as HTMLTextAreaElement;
@@ -33,7 +37,7 @@ const ReverseForm = (props: ReverseFormProps) => {
   };
 
   const performPost = (event: React.FormEvent<HTMLFormElement>) => {
-    reverseText(inputText);
+    performCall({ textToReverse: inputText });
     event.preventDefault();
   };
 
@@ -95,6 +99,7 @@ const StyledWordCounter = styled.p<any>`
   color: ${({ textColor }) => textColor};
   margin-left: auto;
   font-size: ${({ theme }) => theme.fontSize[2]};
+  white-space: nowrap;
   @media screen and (min-width: ${breakpoints.sm}) {
     font-size: ${({ theme }) => theme.fontSize[3]};
   }
@@ -165,7 +170,7 @@ const StyledSubmitButton = styled.button`
 
   transition: all 250ms ease;
   &:not(:disabled):hover {
-    transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -1px, 0);
   }
   &:disabled {
     opacity: 50%;

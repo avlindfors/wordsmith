@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useApi } from "../../providers/ApiProvider";
+import { useData } from "../../providers/DataProvider";
 import EmptyRecentlyReversed from "../EmptyRecentlyReversed";
 import RecentlyReversed from "../RecentlyReversed";
 import { breakpoints } from "../../styles/breakpoints";
 
 const RecentSection = () => {
-  const { recentlyReversedText } = useApi();
+  const { recentlyReversed } = useData();
 
   return (
     <StyledSectionContainer>
       <StyledSectionHeader>Recently reversed</StyledSectionHeader>
-      {recentlyReversedText.length < 1 ? (
+      {recentlyReversed.length < 1 ? (
         <EmptyRecentlyReversed />
       ) : (
         <RecentlyReversed />

@@ -8,6 +8,9 @@ build/ui:
 start/ui:
 	cd wordsmith-ui; npm run docker:start;
 
+start-dev/ui:
+	cd wordsmith-ui; npm start;
+
 ## Commands for building the server. ##
 install/server:
 	cd wordsmith-server; mvn clean install;

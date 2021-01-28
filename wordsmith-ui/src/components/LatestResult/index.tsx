@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-import { useApi } from "../../providers/ApiProvider";
+import { useData } from "../../providers/DataProvider";
 import { ReactComponent as LockIcon } from "../../icons/lock.svg";
 import { breakpoints } from "../../styles/breakpoints";
 
 const DEFAULT_RESULT_MESSAGE = "Use the form above to reverse some text";
 
 const LatestResult = () => {
-  const { response } = useApi();
+  const { reverseResult } = useData();
 
   return (
     <section>
@@ -19,8 +19,8 @@ const LatestResult = () => {
         </StyledIconContainer>
         <StyledResultBox>
           <p>
-            {response !== undefined
-              ? response.reversedText
+            {reverseResult !== undefined
+              ? reverseResult.reversedText
               : DEFAULT_RESULT_MESSAGE}
           </p>
         </StyledResultBox>

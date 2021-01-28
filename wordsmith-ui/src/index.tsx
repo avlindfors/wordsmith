@@ -1,14 +1,20 @@
+import { Global, ThemeProvider } from "@emotion/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { ApiProvider } from "./providers/ApiProvider";
+import { DataProvider } from "./providers/DataProvider";
 import reportWebVitals from "./reportWebVitals";
+import { globalStyles } from "./styles/globalStyles";
+import { theme } from "./styles/theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApiProvider>
-      <App />
-    </ApiProvider>
+    <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
+      <DataProvider>
+        <App />
+      </DataProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

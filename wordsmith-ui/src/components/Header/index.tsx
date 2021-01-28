@@ -5,7 +5,7 @@ import { breakpoints } from "../../styles/breakpoints";
 function Header() {
   return (
     <StyledHeader>
-      <StyledLogo>Wordsmith Inc.</StyledLogo>
+      <StyledLogo data-testid="site-title">Wordsmith Inc.</StyledLogo>
     </StyledHeader>
   );
 }

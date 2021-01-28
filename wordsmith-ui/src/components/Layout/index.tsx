@@ -26,8 +26,8 @@ const Content = styled.div`
   flex-direction: column;
   padding: ${({ theme }) => theme.spacing[3]};
   padding-top: ${({theme}) => theme.spacing[4]};
-  padding-bottom: ${({theme}) => theme.spacing[7]};
   @media screen and (min-width: ${breakpoints.md}) {
+    padding-bottom: ${({theme}) => theme.spacing[7]};
     padding: ${({ theme }) => theme.spacing[7]};
   }
 

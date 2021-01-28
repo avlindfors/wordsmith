@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { useApi } from "../../providers/ApiProvider";
+import { useData } from "../../providers/DataProvider";
 import resolveRelativeDate from "../../utils/resolveRelativeDate";
 
 import { ReactComponent as ClockIcon } from "../../icons/clock.svg";
@@ -12,9 +12,9 @@ import { breakpoints } from "../../styles/breakpoints";
 export interface RecentlyReversedProps {}
 
 const RecentlyReversed = () => {
-  const { recentlyReversedText } = useApi();
+  const { recentlyReversed } = useData();
 
-  const filteredRecentlyReversed = [...recentlyReversedText].slice(0, 5);
+  const filteredRecentlyReversed = [...recentlyReversed].slice(0, 5);
   return (
     <StyledContainer>
       {filteredRecentlyReversed.map(

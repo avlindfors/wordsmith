@@ -14,12 +14,12 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @Validated
 @RestController
@@ -32,7 +32,6 @@ public class ReverseController {
   /**
    * Creates, stores and returns a representation of some text with each individual word reversed.
    */
-  @CrossOrigin(origins = {"*"})
   @PostMapping(value = "/reverse", produces = APPLICATION_JSON_VALUE,
       consumes = APPLICATION_JSON_VALUE)
   public ReverseResponse reverseWordsInSentence(
@@ -49,7 +48,6 @@ public class ReverseController {
   /**
    * Gets the most recently reversed texts, ordered by creation.
    */
-  @CrossOrigin(origins = {"*"})
   @GetMapping(value = "/reversals", produces = APPLICATION_JSON_VALUE)
   public GetRecentReversalsResponse getRecentReversals() {
     List<ReversedText> recentReversals = reverseService.getRecentReversals();

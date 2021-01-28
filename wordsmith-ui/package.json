@@ -35,10 +35,6 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^12.19.15",
-    "@types/react": "^16.14.2",
-    "@types/react-dom": "^16.9.10",
     "axios": "^0.21.1",
     "luxon": "^1.25.0",
     "react": "^17.0.1",
@@ -49,6 +45,12 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
-    "@types/luxon": "^1.25.1"
+    "@types/http-proxy-middleware": "^0.19.3",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^12.19.15",
+    "@types/luxon": "^1.25.1",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^16.9.10",
+    "http-proxy-middleware": "^1.0.6"
   }
 }
