@@ -1,26 +1,30 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Footer from "../Footer";
-import { breakpoints, maxWidth } from "../../styles/breakpoints";
 
+import Footer from "../Footer";
+import { breakpoints, maxWidth } from "../../style/breakpoints";
+
+/**
+ * Defines global layout. 
+ */
 function Layout({ children }: any) {
   return (
-    <AppContainer>
-      <Content>
+    <StyledAppContainer>
+      <StyledContent>
         {children}
         <Footer />
-      </Content>
-    </AppContainer>
+      </StyledContent>
+    </StyledAppContainer>
   );
 }
 
-const AppContainer = styled.div`
+const StyledAppContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const Content = styled.div`
+const StyledContent = styled.div`
   max-width: ${maxWidth};
   display: flex;
   flex-direction: column;

@@ -1,50 +1,61 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
+import { css, Theme } from "@emotion/react";
+
 import { useData } from "../../providers/DataProvider";
 import resolveRelativeDate from "../../utils/resolveRelativeDate";
-
 import { ReactComponent as ClockIcon } from "../../icons/clock.svg";
 import { ReactComponent as ForwardIcon } from "../../icons/rotate_right.svg";
 import { ReactComponent as BackwardIcon } from "../../icons/rotate_left.svg";
-import { css, Theme } from "@emotion/react";
-import { breakpoints } from "../../styles/breakpoints";
+import { breakpoints } from "../../style/breakpoints";
+import EmptyRecentlyReversed from "../EmptyRecentlyReversed";
 
 export interface RecentlyReversedProps {}
 
-const RecentlyReversed = () => {
+/**
+ * Renders a list of most recent reversals.
+ */
+function RecentlyReversed() {
   const { recentlyReversed } = useData();
 
+  // Make sure we only render 5 elements
   const filteredRecentlyReversed = [...recentlyReversed].slice(0, 5);
   return (
     <StyledContainer>
-      {filteredRecentlyReversed.map(
-        ({ id, originalText, reversedText, createdTs }) => {
-          return (
-            <StyledRecentlyReversedTextContainer key={id}>
-              <StyledIconAndTextWrapper>
-                <StyledForwardIcon />
-                <StyledRecentlyReversedText>
-                  {originalText}
-                </StyledRecentlyReversedText>
-              </StyledIconAndTextWrapper>
+      <ul>
+        {filteredRecentlyReversed.length < 1 ? (
+          <EmptyRecentlyReversed />
+        ) : (
+          filteredRecentlyReversed.map(
+            ({ id, originalText, reversedText, createdTs }) => {
+              return (
+                <StyledRecentlyReversedTextContainer key={id}>
+                  <StyledIconAndTextWrapper>
+                    <StyledForwardIcon />
+                    <StyledRecentlyReversedText>
+                      {originalText}
+                    </StyledRecentlyReversedText>
+                  </StyledIconAndTextWrapper>
 
-              <StyledIconAndTextWrapper>
-                <StyledBackwardIcon />
-                <StyledRecentlyReversedText>
-                  {reversedText}
-                </StyledRecentlyReversedText>
-              </StyledIconAndTextWrapper>
+                  <StyledIconAndTextWrapper>
+                    <StyledBackwardIcon />
+                    <StyledRecentlyReversedText>
+                      {reversedText}
+                    </StyledRecentlyReversedText>
+                  </StyledIconAndTextWrapper>
 
-              <StyledIconAndTextWrapper>
-                <StyledClockIcon />
-                <StyledRecentlyReversedCreatedTime>
-                  {resolveRelativeDate(createdTs)}
-                </StyledRecentlyReversedCreatedTime>
-              </StyledIconAndTextWrapper>
-            </StyledRecentlyReversedTextContainer>
-          );
-        }
-      )}
+                  <StyledIconAndTextWrapper>
+                    <StyledClockIcon />
+                    <StyledRecentlyReversedCreatedTime>
+                      {resolveRelativeDate(createdTs)}
+                    </StyledRecentlyReversedCreatedTime>
+                  </StyledIconAndTextWrapper>
+                </StyledRecentlyReversedTextContainer>
+              );
+            }
+          )
+        )}
+      </ul>
     </StyledContainer>
   );
 };
@@ -53,7 +64,8 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
-const StyledRecentlyReversedTextContainer = styled.div`
+const StyledRecentlyReversedTextContainer = styled.li`
+  list-style-type:none;
   background: ${({ theme }) => theme.color.lightCardBackground};
   padding: ${({ theme }) => theme.spacing[4]};
   padding-top: ${({ theme }) => theme.spacing[3]};

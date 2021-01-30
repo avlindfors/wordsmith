@@ -23,8 +23,11 @@ export interface GetRecentReversalsResponse {
   recentReversals: ReversedText[];
 }
 
-const DataContext: any = createContext(undefined);
+export const DataContext: any = createContext(undefined);
 
+/**
+ * Wrap this around any component to have reactive access to app state.
+ */
 function DataProvider({ children }: any) {
   const [recentlyReversed, setRecentlyReversed] = useState<ReversedText[]>([]);
   const [reverseResult, setReverseResult] = useState<ReversedText | undefined>(undefined);

@@ -1,8 +1,12 @@
-import styled from "@emotion/styled";
 import React from "react";
-import { breakpoints } from "../../styles/breakpoints";
+import styled from "@emotion/styled";
 
-const Footer = () => {
+import { breakpoints } from "../../style/breakpoints";
+
+/**
+ * Renders a page footer.
+ */
+function Footer() {
   return (
     <StyledFooter>
       <p>Created by Alexander Lindfors with React & Spring Boot</p>

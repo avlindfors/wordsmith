@@ -42,7 +42,7 @@ function useAxios({
   const [error, setError] = useState<ErrorObject | undefined>(undefined);
   const [response, setResponse] = useState<any | undefined>(undefined);
 
-  function performCall(data : any): void {
+  async function performCall(data : any) {
     var actualDelayMillis = delayMillis;
     if (isProduction) {
       actualDelayMillis = 0;
@@ -66,7 +66,6 @@ function useAxios({
           }
         })
         .catch((error: AxiosError) => {
-          console.error(error);
           if (error.request !== undefined) {
             const errorObject: ErrorObject = {
               errorName: ErrorName.NETWORK_ERROR,

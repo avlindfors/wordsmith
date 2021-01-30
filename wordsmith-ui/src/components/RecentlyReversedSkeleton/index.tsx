@@ -1,7 +1,10 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
 
-const RecentlyReversedSkeleton = () => {
+/**
+ * Create a simple skeleton representation of a recent reversal;
+ */
+function RecentlyReversedSkeleton() {
   return (
     <StyledSkeletonContainer>
       <StyledHeader></StyledHeader>

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "e2e:docker": "CYPRESS_baseUrl=http://localhost:8000 npm run e2e",
+    "e2e:dev": "CYPRESS_baseUrl=http://localhost:3000 npm run e2e",
+    "e2e": "cypress open --config integrationFolder=cypress/e2e",
     "start": "react-scripts start",
     "docker:build": "docker build . -t avlindfors/wordsmith-ui",
     "docker:start": "docker run -p 8000:8000 avlindfors/wordsmith-ui",
@@ -47,10 +50,12 @@
   "devDependencies": {
     "@types/http-proxy-middleware": "^0.19.3",
     "@types/jest": "^26.0.20",
-    "@types/node": "^12.19.15",
     "@types/luxon": "^1.25.1",
+    "@types/node": "^12.19.15",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
-    "http-proxy-middleware": "^1.0.6"
+    "cypress": "^6.3.0",
+    "http-proxy-middleware": "^1.0.6",
+    "msw": "^0.26.0"
   }
 }

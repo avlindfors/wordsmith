@@ -1,9 +1,12 @@
 import ErrorName from "../enums/ErrorName";
 import { ErrorObject } from "../providers/DataProvider";
 
-export const BAD_INPUT_ERROR_MESSAGE = "The text must be between 1 and 200 characters";
-export const NETWORK_ERROR_MESSAGE = "Could not connect to server. Try again later";
-export const UNKNOWN_ERROR_MESSAGE = "Something has gone wrong. Try again later";
+export const BAD_INPUT_ERROR_MESSAGE =
+  "The text must be between 1 and 200 characters";
+export const NETWORK_ERROR_MESSAGE =
+  "Could not connect to server. Try again later";
+export const UNKNOWN_ERROR_MESSAGE =
+  "Something has gone wrong. Try again later";
 
 /**
  * Converts returned errorObjects to user friendly error messages.
@@ -11,12 +14,11 @@ export const UNKNOWN_ERROR_MESSAGE = "Something has gone wrong. Try again later"
  */
 function resolveErrorMessage(errorObject: ErrorObject): string | undefined {
   if (errorObject === undefined) {
-    console.error("Can not resolve undefined errorObjects.");
     return UNKNOWN_ERROR_MESSAGE;
   }
 
-  switch(errorObject.errorName) {
-    case ErrorName.PARAMETER_VALIDATION_ERROR: 
+  switch (errorObject.errorName) {
+    case ErrorName.PARAMETER_VALIDATION_ERROR:
       return BAD_INPUT_ERROR_MESSAGE;
     case ErrorName.NETWORK_ERROR:
       return NETWORK_ERROR_MESSAGE;

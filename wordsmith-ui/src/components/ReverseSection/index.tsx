@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-import Header from "../Header";
 import ReverseForm from "../ReverseForm";
 import LatestResult from "../LatestResult";
-import { breakpoints } from "../../styles/breakpoints";
+import { breakpoints } from "../../style/breakpoints";
 
-const MainSection = () => {
+/**
+ * Container for the reverse form section.
+ */
+function ReverseSection() {
   return (
     <StyledSectionContainer>
       <section>
-        <Header />
+        <StyledHeader>
+          <StyledLogo>Wordsmith Inc.</StyledLogo>
+        </StyledHeader>
         <section>
           <StyledIntroductionHeader>Reverse words</StyledIntroductionHeader>
           <StyledIntroductionText>
@@ -24,6 +28,19 @@ const MainSection = () => {
     </StyledSectionContainer>
   );
 };
+
+const StyledHeader = styled.header`
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  text-align: left;
+  @media screen and (min-width: ${breakpoints.md}) {
+    margin-bottom: ${({ theme }) => theme.spacing[8]};
+  }
+`;
+
+const StyledLogo = styled.h1`
+  color: ${({ theme }) => theme.color.logoColor};
+  font-size: ${({ theme }) => theme.fontSize[4]};
+`;
 
 const StyledIntroductionHeader = styled.h2`
   color: ${({ theme }) => theme.color.primary};
@@ -46,9 +63,9 @@ const StyledIntroductionText = styled.p`
   }
 `;
 
-const StyledSectionContainer = styled.div`
+const StyledSectionContainer = styled.section`
   background: ${({ theme }) => theme.color.background.dark};
   grid-column: 1;
 `;
 
-export default MainSection;
+export default ReverseSection;

@@ -1,13 +1,16 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
 
 import { useData } from "../../providers/DataProvider";
 import { ReactComponent as LockIcon } from "../../icons/lock.svg";
-import { breakpoints } from "../../styles/breakpoints";
+import { breakpoints } from "../../style/breakpoints";
 
 const DEFAULT_RESULT_MESSAGE = "Use the form above to reverse some text";
 
-const LatestResult = () => {
+/**
+ * Renders the most recent result.
+ */
+function LatestResult() {
   const { reverseResult } = useData();
 
   return (

@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { useData } from "../../providers/DataProvider";
 import resolveErrorMessage from "../../utils/resolveErrorMessage";
 import { ReactComponent as WarningIcon } from "../../icons/error.svg";
-import { breakpoints } from "../../styles/breakpoints";
+import { breakpoints } from "../../style/breakpoints";
 import useAxios from "../../hooks/useAxios";
 
 const DEFAULT_PLACEHOLDER = "Enter some text here that you want to reverse.";
@@ -19,7 +19,10 @@ function validateForm(inputText: string): boolean {
 
 const INPUT_MAX_LENGTH = 200;
 
-const ReverseForm = () => {
+/**
+ * Create and handle the main form.
+ */
+function ReverseForm() {
   const { color } = useTheme();
   const [inputText, setInputText] = useState<string>("");
   const { updateReverseResult } = useData();

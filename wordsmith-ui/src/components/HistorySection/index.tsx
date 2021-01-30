@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useData } from "../../providers/DataProvider";
-import EmptyRecentlyReversed from "../EmptyRecentlyReversed";
+
 import RecentlyReversed from "../RecentlyReversed";
-import { breakpoints } from "../../styles/breakpoints";
+import { breakpoints } from "../../style/breakpoints";
 
-const RecentSection = () => {
-  const { recentlyReversed } = useData();
-
-  return (
+/**
+ * Renders the recent reversals section.
+ */
+function HistorySection() {
+    return (
     <StyledSectionContainer>
       <StyledSectionHeader>Recently reversed</StyledSectionHeader>
-      {recentlyReversed.length < 1 ? (
-        <EmptyRecentlyReversed />
-      ) : (
         <RecentlyReversed />
-      )}
     </StyledSectionContainer>
   );
 };
@@ -30,7 +26,7 @@ const StyledSectionHeader = styled.h1`
   }
 `;
 
-const StyledSectionContainer = styled.div`
+const StyledSectionContainer = styled.section`
   background: ${({ theme }) => theme.color.background.dark};
   padding-top: ${({ theme }) => theme.spacing[7]};
   grid-column: 2;
@@ -42,4 +38,4 @@ const StyledSectionContainer = styled.div`
   }
 `;
 
-export default RecentSection;
+export default HistorySection;

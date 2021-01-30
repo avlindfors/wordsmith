@@ -7,6 +7,9 @@ interface PropType {
   isError: boolean;
 }
 
+/**
+ * Renders a loading or error screen.
+ */
 function FullScreenLoadingScreen({ isError }: PropType) {
   return (
     <StyledAppLoader>

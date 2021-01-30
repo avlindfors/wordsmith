@@ -8,8 +8,17 @@ build/ui:
 start/ui:
 	cd wordsmith-ui; npm run docker:start;
 
-start-dev/ui:
+start/ui/dev:
 	cd wordsmith-ui; npm start;
+
+test/unit:
+	cd wordsmith-ui; npm test;
+
+test/e2e/docker:
+	cd wordsmith-ui; npm run e2e:docker;
+
+test/e2e/dev:
+	cd wordsmith-ui; npm run e2e:dev;
 
 ## Commands for building the server. ##
 install/server:
@@ -20,6 +29,9 @@ build/server:
 
 start/server:
 	cd wordsmith-server; make start;
+
+start/server/dev:
+	cd wordsmith-server; make start/dev;
 
 ## Build the entire system ##
 build:
