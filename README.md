@@ -2,14 +2,28 @@
 
 A fullstack web-app built with React & Spring Boot.
 
-## Quick start
-
 > If you want to start the app outside of a docker container you need to have *npm* and *maven* installed as well as a *mongo* database instance. You can use the Spring Boot *application.properties* file to point to your mongo instance of choice.
 
-Docker is required to get started with a local production build quickly. A Dockerized production build of the app can be prepared for local deployment.
 
-*The dockerized app has been tested on macOS Catalina and Windows 10.* 
-*All commands are run from the project root unless otherwise specified* 
+**Note** All commands are run from the project root unless otherwise specified
+## Quick start for development build
+
+### 1. UI
+```bash
+# in /wordsmith-ui
+> npm install
+> npm start
+```
+The development build has hot-reload features and is accessible at *http://localhost:3000* by default.
+### 2. Backend
+```bash
+# in /wordsmith-server
+> mvn clean install
+> mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
+The development build is accessible at *http://localhost:8080* by default and requires a mongo instance to work.
+## Quick start for production build
+Docker is required to get started with a local production build. The dockerized app has been tested on macOS Catalina and Windows 10.
 ### 1. Build the UI and server.
 With Makefile (builds ui and server docker image)
 ```bash
@@ -23,7 +37,7 @@ With docker
 > docker build . -t avlindfors/wordsmith-server
 ```
 ### 2. Start the UI and server.
-With Makefile (starts ui and server docker containers, incl. a mongo instance with mongo-express)
+With Makefile (starts ui and backend docker containers, incl. a mongo instance with mongo-express)
 ```bash
 > make start
 ```
@@ -34,14 +48,14 @@ With docker
 # in /wordsmith-server
 > docker run -p 8080:8080 avlindfors/wordsmith-server
 ```
-### 3. Usage
-#### 3.1 React UI
-Reach the UI at **http://localhost:8000**
+## Usage
+### 3.1 React UI
+Reach the UI at **http://localhost:3000** for the development build or **http://localhost:8000** for the production build.
 
 The backend must be available for the UI to be usable. If you see an error page when the app is opened in a browser this most likely means that 
  1. the backend is not started or
  2. the backend can not connect to the configured mongo instance.
-#### 3.2 Spring Boot backend
+### 3.2 Spring Boot backend
 Reach the Spring Boot app at **http://localhost:8080**
 
 **Note** There is no integrated API documentation at this time.
@@ -75,12 +89,12 @@ The two available endpoints are:
     }] 
   }
   ```
-#### 3.3 Mongo admin interface (mongo-express)
+### 3.3 Mongo admin interface (mongo-express)
 Reach the Mongo admin interface at **http://localhost:8081**
 
 The dockerized Mongo instance does not reset between restarts. Use the admin interface to clear the database or delete individual documents.
 
-**Note** The mongo-express admin ui is only available with the dockerized app.
+> **Note** The mongo-express admin ui is only available with the dockerized app.
 
 ## Testing
 ### End-to-end tests
@@ -91,25 +105,27 @@ To run the e2e tests against the production build:
 
 This will start the Cypress test runner pointing at the dockerized UI. *Keep in mind that the e2e tests will use whichever mongo instance the backend is connected to.*
 
-**Note** Using the script `npm run e2e:dev` you can start the Cypress test runner against the development build.
+**Note** Using the script `npm run e2e:dev` you can start the Cypress test runner against a running development build.
    
 ### React tests
 Run the test script in the wordsmith-ui module. For example:
 ```bash
-# in /wordsmith-ui
+make test/ui
+# or in /wordsmith-ui
 npm run test
 ```
-This will run some simple unit tests which does not require the backend to be running.
+This will start the test watcher. Press **a** to run all tests. This does not require the backend to be running.
 ### Spring Boot tests
 Use maven or run tests from your IDE. For example, using the command line:
 ```bash
-# in /wordsmith-server
+make test/server
+# or in /wordsmith-server
 mvn test
 ```
 This will run some integration & unit tests using an embedded mongo instance.
 
 ## Configuration & Environment variables
-Using the dockerized UI & Backend apps it should be relatively straight-forward to deploy this system to a production environment.
+It should be relatively straight-forward to deploy this system to a production environment using the dockerized UI & Backend apps.
 Most likely the UI & Backend would be deployed separately to encourage a micro-service architecture.
 ### Configuring the UI
 The UI can be configured to point at any arbitrary domain using the environment variables `$REACT_APP_API_HOST` and `$REACT_APP_API_PORT`. 

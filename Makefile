@@ -11,6 +11,9 @@ start/ui:
 start/ui/dev:
 	cd wordsmith-ui; npm start;
 
+test/ui:
+	cd wordsmith-ui; npm run test;
+
 test/e2e:
 	cd wordsmith-ui; npm run e2e:docker;
 
