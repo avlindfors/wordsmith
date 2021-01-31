@@ -24,8 +24,8 @@ The development build has hot-reload features and is accessible at *http://local
 The development build is accessible at *http://localhost:8080* by default and requires a mongo instance to work.
 ## Quick start for production build
 Docker is required to get started with a local production build. The dockerized app has been tested on macOS Catalina and Windows 10.
-### 1. Build the UI and server.
-With Makefile (builds ui and server docker image)
+### 1. Build the UI and backend.
+With Makefile (builds ui and backend docker image)
 ```bash
 > make build
 ```
@@ -36,7 +36,7 @@ With docker
 # in /wordsmith-server
 > docker build . -t avlindfors/wordsmith-server
 ```
-### 2. Start the UI and server.
+### 2. Start the UI and backend.
 With Makefile (starts ui and backend docker containers, incl. a mongo instance with mongo-express)
 ```bash
 > make start
@@ -65,27 +65,27 @@ The two available endpoints are:
   * Example body: 
   ```json
   {
-    textToReverse: "Reverse me!"
+    "textToReverse": "Reverse me!"
   }
   ```
   * Example response: 
   ```json
   {
-    id: "c54f69a5-0bed-412e-a2c3-6db43a18b6e0",
-    originalText: "Reverse me!",
-    reversedText: "esreveR em!",
-    createdTs: "2021-01-28T21:20:07.373Z"
+    "id": "c54f69a5-0bed-412e-a2c3-6db43a18b6e0",
+    "originalText": "Reverse me!",
+    "reversedText": "esreveR em!",
+    "createdTs": "2021-01-28T21:20:07.373Z"
   }  
   ```
 * *(GET)* /api/v1/reversals 
   * Example response: 
   ```json
   {
-    recentReversals: [{
-      id: "c54f69a5-0bed-412e-a2c3-6db43a18b6e0",
-      originalText: "Reverse me!",
-      reversedText: "esreveR em!",
-      createdTs: "2021-01-28T21:20:07.373Z"
+    "recentReversals": [{
+      "id": "c54f69a5-0bed-412e-a2c3-6db43a18b6e0",
+      "originalText": "Reverse me!",
+      "reversedText": "esreveR em!",
+      "createdTs": "2021-01-28T21:20:07.373Z"
     }] 
   }
   ```
