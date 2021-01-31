@@ -1,4 +1,4 @@
-## Commands for building the UI. ##
+## React app control ##
 install/ui:
 	cd wordsmith-ui; npm install;
 
@@ -11,27 +11,25 @@ start/ui:
 start/ui/dev:
 	cd wordsmith-ui; npm start;
 
-test/unit:
-	cd wordsmith-ui; npm test;
-
-test/e2e/docker:
+test/e2e:
 	cd wordsmith-ui; npm run e2e:docker;
 
-test/e2e/dev:
-	cd wordsmith-ui; npm run e2e:dev;
-
-## Commands for building the server. ##
+## Spring Boot app control ##
 install/server:
-	cd wordsmith-server; mvn clean install;
+	cd wordsmith-server; mvn clean install -DskipTests;
+
+test/server: 
+	cd wordsmith-server; mvn test;
 
 build/server:
-	cd wordsmith-server; make build;
+	cd wordsmith-server; docker build . -t avlindfors/wordsmith-server;
 
 start/server:
-	cd wordsmith-server; make start;
+	cd wordsmith-server; docker-compose up;
 
+## Requires local mongo instance
 start/server/dev:
-	cd wordsmith-server; make start/dev;
+	cd wordsmith-server; mvn spring-boot:run -Dspring-boot.run.profiles=dev;
 
 ## Build the entire system ##
 build:
